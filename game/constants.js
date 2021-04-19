@@ -23,8 +23,18 @@ const EDGE_STATE = {
     PLAYER_SIX: 5,
 };
 
+const RESOURCE_ID = {
+    FOREST: 0,
+    SHEEP: 1,
+    BRICK: 2,
+    WHEAT: 3,
+    ROCK: 4,
+    DESERT: 5,
+};
+
 module.exports = {
     BOARD_SIZE,
     PLAYER_ID,
-    EDGE_STATE
+    EDGE_STATE,
+    RESOURCE_ID
 };

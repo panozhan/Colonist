@@ -5,7 +5,6 @@ const server = http.createServer(app);
 const io = require('socket.io')(server);
 const {BOARD_SIZE} = require('./game/constants');
 const Board = require('./game/Board');
-const board = new Board(BOARD_SIZE.SIZE_6_PLAYERS);
 
 const COMMANDS = {
     TRADE: 0,
@@ -101,10 +100,24 @@ app.get('/game', (req, res) => {
     res.sendFile(__dirname + '/game.html');
 });
 
+app.use("/static", express.static('static'));
+
+const allActiveGames = new Map();
+
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('chat message', (msg) => {
-        console.log('message: ' + msg);
+    socket.on('new game', (gameName, callback) => {
+        console.log('new game: ' + gameName);
+        if (allActiveGames.has(gameName)) {
+            callback({success: 0});
+        } else {
+            const board = new Board(BOARD_SIZE.SIZE_6_PLAYERS);
+            allActiveGames.set(gameName, board);
+            callback({
+                success: 1,
+                data: board.serialize()
+            });
+        } 
     });
     socket.on('disconnect', () => {
         console.log('user disconnected');
