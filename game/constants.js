@@ -32,9 +32,46 @@ const RESOURCE_ID = {
     DESERT: 5,
 };
 
+const CARDS = {
+    CHAPEL: 0,
+    LIBRARY: 1,
+    MARKET: 2,
+    PALACE: 3,
+    KNIGHT: 4,
+    MONOPOLY: 5,
+    YEAR_OF_PLENTY: 6,
+    ROAD_BUILDING: 7,
+    KNIGHT_USED: 8,
+    MONOPOLY_USED: 9,
+    YEAR_OF_PLENTY_USED: 10,
+    ROAD_BUILDING_USED: 11,
+    FOREST: 12,
+    SHEEP: 13,
+    BRICK: 14,
+    WHEAT: 15,
+    ROCK: 16,
+};
+
+const SOCKET_CONSTANTS = {
+    // Server sends the client a list of existing game IDs
+    EXISTING_GAMES: 'existing-games',
+    // Server tells a player another player wants to trade
+    TRADE_REQUEST: 'trade-request',
+    // Client tells the server that window loaded as been called
+    LOADED: 'loaded',
+    CREATE_GAME: 'create-game',
+    START_GAME: 'start-game',
+    JOIN_GAME: 'join-game',
+    // A player initiates a trade
+    TRADE: 'trade',
+    DECIDE_TRADE: 'decide-trade',
+}
+
 module.exports = {
     BOARD_SIZE,
     PLAYER_ID,
     EDGE_STATE,
-    RESOURCE_ID
+    RESOURCE_ID,
+    SOCKET_CONSTANTS,
+    CARDS,
 };
