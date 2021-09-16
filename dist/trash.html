@@ -1,0 +1,109 @@
+<style>
+    #extra-ui {display: none; position: fixed; top:0; left: 0; margin:0; background: rgba(0, 0, 0, 0.7); width: 100vw; height: 100vh;}
+    #trade-ui {width:100%; height: 100%; display: flex; flex-direction: column; justify-content: space-evenly;}
+    .trade-partner-containers {display: none; justify-content: space-evenly;}
+    .trade-partner {width: 250px; height: 350px; border-radius: 1rem; box-shadow: 0 0 20px grey; display: flex; flex-direction: column; justify-content: center; text-align: center; font-size:40px; font-weight: bold; color:black; background-size: cover; font-family: cursive;}
+    .trade-partner:hover {box-shadow: 0 0 20px lightgoldenrodyellow; cursor: pointer}
+    #bank {background-image: url("./dist/parchment-small-6.jpg")}
+    .slider {-webkit-appearance: none; appearance: none; width: 100%; height: 25px; background: #d3d3d3; outline: none; opacity: 0.7; -webkit-transition: .2s; transition: opacity .2s;}
+    .slider:hover {opacity: 1;}
+    #trade-resource-sliders {font-family: cursive; display: none; flex-direction: column; height:70vh; background-image: url('./dist/parchment.jpg'); background-position: center; background-size: cover;}
+    #trade-message {font-size: xx-large; color:black; display: flex; justify-content: center; margin-top: 2rem;}
+    #trade-input-rows{display:flex; flex-grow:1;}
+    .resource-indcator{display: flex; justify-content: space-evenly;}
+    .resource-indcator > div {display: flex; flex-direction: column; justify-content: center; font-size: x-large;}
+    .trade-column{flex-grow:2; display:flex; justify-content: space-evenly; flex-direction: column; margin: 3rem;}
+    .indicator-column{flex-grow:1; display:flex; justify-content: space-evenly; flex-direction: column; margin: 3rem;}
+    #trade-for-word{display: flex; flex-direction: column; justify-content: center; font-size: xx-large;}
+    .slider::-webkit-slider-thumb {-webkit-appearance: none; appearance: none; width: 25px;  height: 25px; background: #4CAF50; cursor: pointer;}
+    #send-trade-request{font-size: xx-large; display: flex; justify-content: center; margin-bottom: 2rem;}
+    #send-trade-request:hover{cursor: pointer;}
+    #extra-ui-close{width:50px; height:50px; position: fixed; right: 50px; top:50px;}
+    #x-line {height: 50px; width: 4px; margin-left: 25px; background-color: white; transform: rotate(45deg);}
+    #x-line-2 {height: 50px; width: 4px; background-color: white; transform: rotate(90deg);}
+    #decide-trade-request{font-size: xx-large; display: flex; justify-content: space-evenly; margin-bottom: 2rem;}
+    #decide-trade-request > div:hover {cursor: pointer;}
+</style>
+
+<div id="extra-ui">
+    <div id="extra-ui-close">
+        <div id="x-line">
+            <div id="x-line-2"></div>
+        </div>
+    </div>
+    <div id="trade-ui">
+        <div id="trade-partner-containers-1" class="trade-partner-containers">
+            <div id="bank" class="trade-partner">Trade with: bank</div>
+        </div>
+        <div id="trade-partner-containers-2" class="trade-partner-containers"></div>
+        <div id="trade-resource-sliders">
+            <div id="trade-message">To mpotoski: I will trade</div>
+            <div id="trade-input-rows">
+                <div class="trade-column">
+                    <input type="range" min="0" max="5" value="0" class="slider" id="give-wood-range">
+                    <input type="range" min="0" max="5" value="0" class="slider" id="give-wheat-range">
+                    <input type="range" min="0" max="5" value="0" class="slider" id="give-rock-range">
+                    <input type="range" min="0" max="5" value="0" class="slider" id="give-sheep-range">
+                    <input type="range" min="0" max="5" value="0" class="slider" id="give-brick-range">
+                </div>
+                <div class="indicator-column">
+                    <div class="resource-indcator">
+                        <div id="give-wood-indicator">0</div> 
+                        <img src="./dist/forest-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="give-wheat-indicator">0</div> 
+                        <img src="./dist/wheat-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="give-rock-indicator">0</div> 
+                        <img src="./dist/rock-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="give-sheep-indicator">0</div> 
+                        <img src="./dist/sheep-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="give-brick-indicator">0</div> 
+                        <img src="./dist/brick-small.jpg" width="50" height="77">
+                    </div>
+                </div>
+                <div id="trade-for-word">for</div>
+                <div class="indicator-column">
+                    <div class="resource-indcator">
+                        <div id="take-wood-indicator">0</div> 
+                        <img src="./dist/forest-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="take-wheat-indicator">0</div> 
+                        <img src="./dist/wheat-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="take-rock-indicator">0</div> 
+                        <img src="./dist/rock-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="take-sheep-indicator">0</div> 
+                        <img src="./dist/sheep-small.jpg" width="50" height="77">
+                    </div>
+                    <div class="resource-indcator">
+                        <div id="take-brick-indicator">0</div> 
+                        <img src="./dist/brick-small.jpg" width="50" height="77">
+                    </div>
+                </div>
+                <div class="trade-column">
+                    <input type="range" min="0" max="9" value="0" class="slider" id="take-wood-range">
+                    <input type="range" min="0" max="9" value="0" class="slider" id="take-wheat-range">
+                    <input type="range" min="0" max="9" value="0" class="slider" id="take-rock-range">
+                    <input type="range" min="0" max="9" value="0" class="slider" id="take-sheep-range">
+                    <input type="range" min="0" max="9" value="0" class="slider" id="take-brick-range">
+                </div>
+            </div>
+            <div id="send-trade-request">Send Trade Request</div>
+            <div id="decide-trade-request">
+                <div id="accept-trade">Accept</div>
+                <div id="reject-trade">Reject</div>
+            </div>
+        </div>
+    </div>
+</div>

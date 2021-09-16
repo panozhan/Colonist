@@ -3,6 +3,12 @@ const BOARD_SIZE = {
     SIZE_6_PLAYERS: 6,
 };
 
+const CLICKABLE_ELEMENT_TYPE = {
+    ROAD: 0,
+    SETTLEMENT: 1,
+    CITY: 2,
+};
+
 const PLAYER_ID = {
     PLAYER_ONE: 0,
     PLAYER_TWO: 1,
@@ -13,7 +19,7 @@ const PLAYER_ID = {
     BANK: 6
 };
 
-const EDGE_STATE = {
+const OCCUPATION_STATE = {
     FREE: -1,
     PLAYER_ONE: 0,
     PLAYER_TWO: 1,
@@ -30,6 +36,14 @@ const RESOURCE_ID = {
     WHEAT: 3,
     ROCK: 4,
     DESERT: 5,
+    // The below are only used in client side
+    SEA: 6,
+    WOOD_PORT: 7,
+    SHEEP_PORT: 8,
+    WHEAT_PORT: 9,
+    BRICK_PORT: 10,
+    ROCK_PORT: 11,
+    ANY_PORT: 12,
 };
 
 const CARDS = {
@@ -65,13 +79,38 @@ const SOCKET_CONSTANTS = {
     // A player initiates a trade
     TRADE: 'trade',
     DECIDE_TRADE: 'decide-trade',
-}
+    BUILD: 'build',
+    // notify a build action by another player
+    NOTIFY_BUILD: 'notify-build',
+
+    // Tell builds
+    TELL_BUILD_SETTLEMENT: 'tb-0',
+    TELL_BUILD_ROAD: 'tb-1',
+
+    TELL_TURN_START: 'tt-s',
+
+    TELL_TAKE_CARDS: 'tt-c',
+};
+
+const BUILD_TYPES = {
+    ROAD: 0,
+    SETTLEMENT: 1,
+    CITY: 2,
+};
+
+const ROAD_SPEC = {
+    ROAD_WIDTH: 0.15,
+    ROAD_HEIGHT: 0.65
+};
 
 module.exports = {
+    BUILD_TYPES,
     BOARD_SIZE,
     PLAYER_ID,
-    EDGE_STATE,
+    OCCUPATION_STATE,
     RESOURCE_ID,
     SOCKET_CONSTANTS,
     CARDS,
+    CLICKABLE_ELEMENT_TYPE,
+    ROAD_SPEC,
 };

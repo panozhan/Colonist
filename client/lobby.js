@@ -1,4 +1,5 @@
 import {SOCKET_CONSTANTS} from '../game/constants';
+import CanvasManager from './canvas-manager';
 
 function changeGames(games, onclick) {
     const container = document.getElementById('games-container');
@@ -19,7 +20,7 @@ function changeGames(games, onclick) {
     });
 }
 
-function startGame(res, socket, username, runGame) {
+function startGame(boardSize, data, canvasManager) {
     const canvas = document.getElementById('game-canvas');
     canvas.style.display = 'block';
     canvas.style.width = '100vw';
@@ -27,11 +28,12 @@ function startGame(res, socket, username, runGame) {
     document.getElementById('games-container').style.display = 'none';
     document.getElementById('username').style.display = 'none';
     document.getElementsByTagName('body')[0].style.padding = '0px';
-    console.log(res);
-    runGame(canvas, res.data, socket, username);
+    canvasManager.startGame(boardSize, data);
 }
 
-export default function setupLobby(socket, runGame) {
+export default function setupLobby(socket) {
+    const canvas = document.getElementById('game-canvas');
+    const canvasManager = new CanvasManager(canvas, socket);
     socket.on(SOCKET_CONSTANTS.EXISTING_GAMES, (games) => {
         console.log('change games:', games);
         changeGames(games, gameName => {
@@ -41,7 +43,7 @@ export default function setupLobby(socket, runGame) {
                 document.getElementById('username-prompt').style.color = 'red';
             } else {
                 socket.emit(SOCKET_CONSTANTS.JOIN_GAME, {gameName: gameName, username: username}, (res) => {
-                    startGame(res, socket, username, runGame);
+                    startGame(6, res.data, canvasManager);
                 });
             }
         });
@@ -55,9 +57,10 @@ export default function setupLobby(socket, runGame) {
             document.getElementById('username-prompt').style.color = 'red';
         }
         if (input.value && username) {
+            
             socket.emit(SOCKET_CONSTANTS.CREATE_GAME, {gameName: input.value, username: username}, (res) => {
                 if (res.success === 1) {
-                    startGame(res, socket, username, runGame);
+                    startGame(6, res.data, canvasManager);
                 } else {
                     document.getElementById('new-game-instruction')
                         .innerText = 'Sorry the game name is already taken. Please choose another name.'
@@ -65,5 +68,4 @@ export default function setupLobby(socket, runGame) {
             });
         }
     });
-
-} 
+}

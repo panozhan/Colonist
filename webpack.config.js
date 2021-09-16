@@ -7,8 +7,8 @@ module.exports = {
     filename: 'main.js',
     path: path.resolve(__dirname, 'dist'),
   },
-  // optimization: {
-  //   minimize: false
-  // },
-  // mode: 'development',
+  optimization: {
+    minimize: false
+  },
+  mode: 'development',
 };
